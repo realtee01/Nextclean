@@ -130,15 +130,14 @@ const App = () => {
           <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             <AnimatePresence mode='popLayout'>
               {filteredData.map((service) => (
-                <JobCard 
-                  key={service.id}
-                  image={service.image}
-                  title={service.title}
-                  desc={service.desc}
-                  category={service.category}
-                  {/* Function: Pass modal trigger to all JobCards */}
-                  onCardClick={openBookingModal} 
-                />
+               <JobCard 
+                key={service.id}
+              image={service.image}
+            title={service.title}
+            desc={service.desc}
+          category={service.category}
+          onCardClick={openBookingModal} 
+            />
               ))}
             </AnimatePresence>
           </motion.div>
