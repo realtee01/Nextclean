@@ -131,6 +131,7 @@ const App = () => {
       <footer className="py-12 text-center bg-white border-t border-slate-100">
         <div className="text-xl font-black text-green-600 mb-2">Nextclean.</div>
         <p className="text-slate-400 font-medium text-xs">Redefining Domestic Excellence. Lagos, Nigeria.</p>
+         <p className="text-slate-400 font-medium text-xs">(©) 2026 Nextclean</p>
       </footer>
 
       {/* Pop-up Modals */}
