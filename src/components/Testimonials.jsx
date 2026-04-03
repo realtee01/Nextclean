@@ -8,7 +8,8 @@ const Testimonials = () => {
     { name: "bayo oladele", role: "Business Owner", text: "Professionalism at its peak. They handled my office sanitization with zero disruption to our workflow.", img: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop" },
     { name: "Rebecca johnson", role: "It Consultant, London", text: "Managing properties in Lagos from the UK used to be a headache. Nextclean provides consistent quality and great support. They are the only team I trust to maintain my home while I'm away.",
 img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" },
-    { name: "Alice joyce", role: "Real Estate, Abuja", text: "Consistent quality and great customer support. They set the standard for domestic excellence in Nigeria.", img: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=100&h=100&fit=crop" }
+    { name: "A joyce", role: "Nurse, Houston", text: "I booked a post-construction clean for my parents' new house from all the way in Texas. The process was stress-free and the results were amazing. Nextclean is a lifesaver for those of us abroad."
+, img: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=100&h=100&fit=crop" }
   ];
 
   return (
