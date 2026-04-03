@@ -10,12 +10,8 @@ import ContactModal from './components/ContactModal';
 import cleaning5 from './assets/Cleaning-5.jpg';
 import cleaning4 from './assets/Cleaning-4.jpg';
 import cleaning6 from './assets/Cleaning-6.jpg';
-import cleaning3 from './assets/Cleaning-3.jpg';
-import gardening1 from './assets/gardening-1.jpg';
-import moving1 from './assets/Moving-1.jpg';
 
 const App = () => {
-  // 1. State for the Pop-up Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filter, setFilter] = useState("All Services");
 
@@ -23,23 +19,23 @@ const App = () => {
     { id: 1, category: "Deep Clean", title: "Deep Residential", image: cleaning5, desc: "A 50-point checklist covering baseboards, vents, and behind appliances." },
     { id: 2, category: "Residential", title: "Standard Care", image: cleaning4, desc: "Consistent maintenance for busy homes. Dusting, mopping, and sanitization." },
     { id: 3, category: "Commercial", title: "Office Sparkle", image: cleaning6, desc: "Late-night cleaning for corporate hubs. Zero disruption to your workflow." },
-    { id: 4, category: "Residential", title: "Kitchen Specialized", image: cleaning3, desc: "Degreasing, appliance detailing, and cabinet organization." },
-    { id: 5, category: "Gardening", title: "Garden Grooming", image: gardening1, desc: "Lawn mowing, hedge trimming, and outdoor space clearing." },
-    { id: 6, category: "Moving", title: "Move-in/Move-out", image: moving1, desc: "Ensuring your new home is sterile and your old one is deposit-ready." },
   ];
-
-  const categories = ["All Services", "Residential", "Deep Clean", "Commercial", "Gardening", "Moving"];
 
   const filteredData = filter === "All Services" 
     ? services 
     : services.filter(item => item.category === filter);
 
+  // Common function to open the modal
+  const openBookingModal = () => setIsModalOpen(true);
+
   return (
-    <div className="bg-white min-h-screen selection:bg-green-100 selection:text-green-900">
-      <Header />
+    <div className="bg-white min-h-screen selection:bg-green-100 selection:text-green-900 overflow-x-hidden">
       
-      {/* Hero with 'Book' function passed in */}
-      <Hero onBookClick={() => setIsModalOpen(true)} />
+      {/* Function: Pass modal trigger to Header */}
+      <Header onContactClick={openBookingModal} />
+      
+      {/* Function: Pass modal trigger to Hero */}
+      <Hero onBookClick={openBookingModal} />
 
       {/* --- TRUST BAR --- */}
       <div className="bg-slate-50 py-16 border-y border-slate-100">
@@ -58,7 +54,7 @@ const App = () => {
         </div>
       </div>
 
-      {/* --- VALUE PROP --- */}
+      {/* --- VALUE PROP SECTION --- */}
       <section className="max-w-7xl mx-auto px-10 py-24 grid lg:grid-cols-2 gap-24 items-center">
         <div>
           <h2 className="text-5xl font-bold leading-[0.95] tracking-tighter mb-8 text-slate-900">
@@ -85,33 +81,37 @@ const App = () => {
           <div className="relative z-10">
             <h3 className="text-3xl font-bold mb-6">The Nextclean Guarantee</h3>
             <p className="opacity-90 leading-relaxed mb-8 text-lg">
-              If you aren't 100% satisfied with the sparkle of your home, we'll come back and re-clean for free within 24 hours. No questions asked.
+              If you aren't 100% satisfied with the sparkle of your home, we'll come back and re-clean for free. No questions asked.
             </p>
-            <button 
-              onClick={() => setIsModalOpen(true)}
+            {/* Function: Guarantee Section Button triggers Modal */}
+            <motion.button 
+              onClick={openBookingModal}
+              whileHover={{ 
+                scale: 1.1,
+                transition: { type: "spring", stiffness: 400, damping: 10 } // Bouncy spring
+              }}
+              whileTap={{ scale: 0.95 }}
               className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-sm hover:bg-slate-100 transition-colors shadow-lg"
             >
               Start Now
-            </button>
+            </motion.button>
           </div>
           <div className="absolute -bottom-20 -right-20 h-64 w-64 bg-green-500 rounded-full opacity-50 blur-3xl"></div>
         </motion.div>
       </section>
 
-      {/* --- BOOKING PROCESS (NEW SECTION) --- */}
       <BookingProcess />
 
-      {/* --- DYNAMIC SERVICES SECTION --- */}
-      <section className="bg-slate-50 py-24 px-10">
+      {/* --- SERVICES grid (with ID for smooth scrolling) --- */}
+      <section id="services" className="bg-slate-50 py-24 px-10 mt-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div>
               <h2 className="text-6xl font-bold tracking-tighter">Our Services.</h2>
-              <p className="text-slate-400 mt-4 font-medium italic">Filter our expertise below.</p>
             </div>
             
             <div className="flex gap-2 overflow-x-auto pb-4 md:pb-0">
-              {categories.map((cat) => (
+              {["All Services", "Residential", "Commercial", "Deep Clean"].map((cat) => (
                 <button 
                   key={cat}
                   onClick={() => setFilter(cat)}
@@ -136,6 +136,8 @@ const App = () => {
                   title={service.title}
                   desc={service.desc}
                   category={service.category}
+                  {/* Function: Pass modal trigger to all JobCards */}
+                  onCardClick={openBookingModal} 
                 />
               ))}
             </AnimatePresence>
@@ -143,13 +145,11 @@ const App = () => {
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
       <footer className="py-20 text-center bg-white border-t border-slate-100">
         <div className="text-2xl font-black text-green-600 mb-4">Nextclean.</div>
         <p className="text-slate-400 font-medium text-sm">Redefining Domestic Excellence. Lagos, Nigeria.</p>
       </footer>
 
-      {/* --- 2. THE MODAL (POP-UP) --- */}
       <ContactModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
