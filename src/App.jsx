@@ -7,6 +7,8 @@ import BookingProcess from './components/BookingProcess';
 import ContactModal from './components/ContactModal';
 import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
+import Testimonials from './components/Testimonials';
+import CustomCursor from './components/CustomCursor';
 
 import cleaning5 from './assets/Cleaning-5.jpg';
 import cleaning4 from './assets/Cleaning-4.jpg';
@@ -35,6 +37,7 @@ const App = () => {
 
   return (
     <div className="bg-white min-h-screen selection:bg-green-100 overflow-x-hidden">
+      <CustomCursor />
       <Header onContactClick={openBooking} />
       
       <Hero onBookClick={openBooking} />
@@ -81,6 +84,8 @@ const App = () => {
       </section>
 
       <BookingProcess />
+      
+      <Testimonials />
 
       <Pricing onBookClick={openBooking} />
 
@@ -122,10 +127,9 @@ const App = () => {
       <FAQ />
 
       <footer className="py-12 text-center bg-white border-t border-slate-100">
-          <div className="text-xl font-black text-green-600 mb-2">Nextclean.</div>
+        <div className="text-xl font-black text-green-600 mb-2">Nextclean.</div>
         <p className="text-slate-400 font-medium text-xs">Redefining Domestic Excellence. Lagos, Nigeria.</p>
-            <p className="text-slate-400 font-medium text-xs">(c) 2026 Nextclean </p>
-        </footer>
+      </footer>
 
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
