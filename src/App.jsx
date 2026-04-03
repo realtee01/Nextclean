@@ -6,7 +6,6 @@ import JobCard from './components/JobCard';
 import BookingProcess from './components/BookingProcess';
 import ContactModal from './components/ContactModal';
 
-// Images - Double check these filenames in your src/assets folder
 import cleaning5 from './assets/Cleaning-5.jpg';
 import cleaning4 from './assets/Cleaning-4.jpg';
 import cleaning6 from './assets/Cleaning-6.jpg';
@@ -33,10 +32,8 @@ const App = () => {
   return (
     <div className="bg-white min-h-screen selection:bg-green-100 overflow-x-hidden">
       <Header onContactClick={() => setIsModalOpen(true)} />
-      
       <Hero onBookClick={() => setIsModalOpen(true)} />
 
-      {/* --- TRUST BAR --- */}
       <div className="bg-slate-50 py-12 md:py-16 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
@@ -53,15 +50,14 @@ const App = () => {
         </div>
       </div>
 
-      {/* --- VALUE PROP SECTION --- */}
       <section className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24 grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
         <div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 text-slate-900">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 text-slate-900 leading-tight">
             More than just a <br/>
-            <span className="text-green-600 italic underline decoration-green-100">mop and bucket.</span>
+            <span className="text-green-600 italic">mop and bucket.</span>
           </h2>
           <p className="text-slate-500 text-base md:text-lg mb-8 leading-relaxed">
-            Nextclean provides a full-suite household management experience.
+            Nextclean handles the logistics of a clean lifestyle.
           </p>
           <div className="grid grid-cols-2 gap-4">
             {['Vetted Staff', 'Hospital Grade', 'Custom Checklists', 'Insured'].map((item) => (
@@ -72,17 +68,15 @@ const App = () => {
             ))}
           </div>
         </div>
-        
         <motion.div whileHover={{ rotate: -1 }} className="bg-green-600 rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
           <h3 className="text-2xl font-bold mb-4">The Nextclean Guarantee</h3>
-          <p className="opacity-90 text-sm md:text-base mb-8 italic">100% satisfied or we re-clean for free within 24 hours.</p>
-          <button onClick={() => setIsModalOpen(true)} className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-lg active:scale-95 transition-transform">Start Now</button>
+          <p className="opacity-90 text-sm md:text-base mb-8">100% satisfied or we re-clean for free within 24 hours.</p>
+          <button onClick={() => setIsModalOpen(true)} className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-lg">Start Now</button>
         </motion.div>
       </section>
 
       <BookingProcess />
 
-      {/* --- SERVICES SECTION --- */}
       <section id="services" className="bg-slate-50 py-16 md:py-24 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
@@ -101,7 +95,6 @@ const App = () => {
               ))}
             </div>
           </div>
-
           <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             <AnimatePresence mode='popLayout'>
               {filteredData.map((service) => (
@@ -121,7 +114,7 @@ const App = () => {
 
       <footer className="py-12 text-center bg-white border-t border-slate-100">
         <div className="text-xl font-black text-green-600 mb-2">Nextclean.</div>
-        <p className="text-slate-400 font-medium text-xs">Redefining Domestic Excellence. Lagos, Nigeria.</p>
+        <p className="text-slate-400 font-medium text-xs">Lagos, Nigeria.</p>
       </footer>
 
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
