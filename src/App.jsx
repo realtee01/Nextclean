@@ -3,9 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import JobCard from './components/JobCard';
-import FilterBar from './components/FilterBar';
+import BookingProcess from './components/BookingProcess';
+import ContactModal from './components/ContactModal';
 
-// Image Imports (matching your phone filenames)
+// Image Imports
 import cleaning5 from './assets/Cleaning-5.jpg';
 import cleaning4 from './assets/Cleaning-4.jpg';
 import cleaning6 from './assets/Cleaning-6.jpg';
@@ -14,13 +15,15 @@ import gardening1 from './assets/gardening-1.jpg';
 import moving1 from './assets/Moving-1.jpg';
 
 const App = () => {
+  // 1. State for the Pop-up Modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [filter, setFilter] = useState("All Services");
 
   const services = [
     { id: 1, category: "Deep Clean", title: "Deep Residential", image: cleaning5, desc: "A 50-point checklist covering baseboards, vents, and behind appliances." },
     { id: 2, category: "Residential", title: "Standard Care", image: cleaning4, desc: "Consistent maintenance for busy homes. Dusting, mopping, and sanitization." },
     { id: 3, category: "Commercial", title: "Office Sparkle", image: cleaning6, desc: "Late-night cleaning for corporate hubs. Zero disruption to your workflow." },
-    { id: 4, category: "Residential", title: "Kitchen specialized", image: cleaning3, desc: "Degreasing, appliance detailing, and cabinet organization." },
+    { id: 4, category: "Residential", title: "Kitchen Specialized", image: cleaning3, desc: "Degreasing, appliance detailing, and cabinet organization." },
     { id: 5, category: "Gardening", title: "Garden Grooming", image: gardening1, desc: "Lawn mowing, hedge trimming, and outdoor space clearing." },
     { id: 6, category: "Moving", title: "Move-in/Move-out", image: moving1, desc: "Ensuring your new home is sterile and your old one is deposit-ready." },
   ];
@@ -34,14 +37,12 @@ const App = () => {
   return (
     <div className="bg-white min-h-screen selection:bg-green-100 selection:text-green-900">
       <Header />
-      <Hero />
+      
+      {/* Hero with 'Book' function passed in */}
+      <Hero onBookClick={() => setIsModalOpen(true)} />
 
-      {/* --- A. THE TRUST BAR --- */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        className="bg-slate-50 py-16 border-y border-slate-100"
-      >
+      {/* --- TRUST BAR --- */}
+      <div className="bg-slate-50 py-16 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
           {[
             { label: "Happy Homes", val: "500+" },
@@ -55,17 +56,17 @@ const App = () => {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
-      {/* --- DETAILED VALUE PROP --- */}
+      {/* --- VALUE PROP --- */}
       <section className="max-w-7xl mx-auto px-10 py-24 grid lg:grid-cols-2 gap-24 items-center">
         <div>
-          <h2 className="text-5xl font-bold leading-[0.95] tracking-tighter mb-8">
+          <h2 className="text-5xl font-bold leading-[0.95] tracking-tighter mb-8 text-slate-900">
             More than just a <br/>
             <span className="text-green-600 italic underline decoration-green-200">mop and bucket.</span>
           </h2>
           <p className="text-slate-500 text-lg mb-10 leading-relaxed">
-            Nextclean provides a full-suite household management experience. From high-pressure steaming to eco-friendly sanitization, we handle the logistics of a clean lifestyle so you don't have to.
+            Nextclean provides a full-suite household management experience. From high-pressure steaming to eco-friendly sanitization, we handle the logistics of a clean lifestyle.
           </p>
           <div className="grid grid-cols-2 gap-6">
             {['Vetted Staff', 'Hospital Grade', 'Custom Checklists', 'Insured Services'].map((item) => (
@@ -86,14 +87,19 @@ const App = () => {
             <p className="opacity-90 leading-relaxed mb-8 text-lg">
               If you aren't 100% satisfied with the sparkle of your home, we'll come back and re-clean for free within 24 hours. No questions asked.
             </p>
-            <button className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-sm hover:bg-slate-100 transition-colors">
-              Read Our Manifesto
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-sm hover:bg-slate-100 transition-colors shadow-lg"
+            >
+              Start Now
             </button>
           </div>
-          {/* Decorative Circle */}
           <div className="absolute -bottom-20 -right-20 h-64 w-64 bg-green-500 rounded-full opacity-50 blur-3xl"></div>
         </motion.div>
       </section>
+
+      {/* --- BOOKING PROCESS (NEW SECTION) --- */}
+      <BookingProcess />
 
       {/* --- DYNAMIC SERVICES SECTION --- */}
       <section className="bg-slate-50 py-24 px-10">
@@ -101,11 +107,10 @@ const App = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div>
               <h2 className="text-6xl font-bold tracking-tighter">Our Services.</h2>
-              <p className="text-slate-400 mt-4 font-medium italic">Click a category to filter our expertise.</p>
+              <p className="text-slate-400 mt-4 font-medium italic">Filter our expertise below.</p>
             </div>
             
-            {/* Custom Filter Bar */}
-            <div className="flex gap-2 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
+            <div className="flex gap-2 overflow-x-auto pb-4 md:pb-0">
               {categories.map((cat) => (
                 <button 
                   key={cat}
@@ -122,10 +127,7 @@ const App = () => {
             </div>
           </div>
 
-          <motion.div 
-            layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
-          >
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             <AnimatePresence mode='popLayout'>
               {filteredData.map((service) => (
                 <JobCard 
@@ -141,10 +143,17 @@ const App = () => {
         </div>
       </section>
 
+      {/* --- FOOTER --- */}
       <footer className="py-20 text-center bg-white border-t border-slate-100">
         <div className="text-2xl font-black text-green-600 mb-4">Nextclean.</div>
         <p className="text-slate-400 font-medium text-sm">Redefining Domestic Excellence. Lagos, Nigeria.</p>
       </footer>
+
+      {/* --- 2. THE MODAL (POP-UP) --- */}
+      <ContactModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 };
