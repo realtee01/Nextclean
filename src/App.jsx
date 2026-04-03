@@ -6,7 +6,7 @@ import JobCard from './components/JobCard';
 import BookingProcess from './components/BookingProcess';
 import ContactModal from './components/ContactModal';
 
-// Image Imports - Ensure these match your assets folder exactly!
+// Images - Make sure these names match your assets folder exactly
 import cleaning5 from './assets/Cleaning-5.jpg';
 import cleaning4 from './assets/Cleaning-4.jpg';
 import cleaning6 from './assets/Cleaning-6.jpg';
@@ -32,13 +32,15 @@ const App = () => {
 
   return (
     <div className="bg-white min-h-screen selection:bg-green-100 overflow-x-hidden">
+      {/* Function: Pass the modal trigger to the Header */}
       <Header onContactClick={() => setIsModalOpen(true)} />
       
+      {/* Hero Section */}
       <Hero onBookClick={() => setIsModalOpen(true)} />
 
-      {/* --- TRUST BAR (Responsive Grid) --- */}
+      {/* --- TRUST BAR --- */}
       <div className="bg-slate-50 py-12 md:py-16 border-y border-slate-100">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
             { label: "Happy Homes", val: "500+" },
             { label: "Expert Cleaners", val: "20+" },
@@ -53,15 +55,15 @@ const App = () => {
         </div>
       </div>
 
-      {/* --- VALUE PROP (Responsive Columns) --- */}
+      {/* --- VALUE PROP --- */}
       <section className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24 grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
         <div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 text-slate-900">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 text-slate-900 leading-tight">
             More than just a <br/>
             <span className="text-green-600 italic">mop and bucket.</span>
           </h2>
           <p className="text-slate-500 text-base md:text-lg mb-8 leading-relaxed">
-            Nextclean handles the logistics of a clean lifestyle.
+            Nextclean provides a full-suite household management experience.
           </p>
           <div className="grid grid-cols-2 gap-4">
             {['Vetted Staff', 'Hospital Grade', 'Custom Checklists', 'Insured'].map((item) => (
@@ -75,8 +77,8 @@ const App = () => {
         
         <motion.div whileHover={{ rotate: -1 }} className="bg-green-600 rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
           <h3 className="text-2xl font-bold mb-4">The Nextclean Guarantee</h3>
-          <p className="opacity-90 text-sm md:text-base mb-8">100% satisfied or we re-clean for free.</p>
-          <button onClick={() => setIsModalOpen(true)} className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-xs">Start Now</button>
+          <p className="opacity-90 text-sm md:text-base mb-8">100% satisfied or we re-clean for free within 24 hours.</p>
+          <button onClick={() => setIsModalOpen(true)} className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-lg">Start Now</button>
         </motion.div>
       </section>
 
@@ -92,7 +94,7 @@ const App = () => {
                 <button 
                   key={cat}
                   onClick={() => setFilter(cat)}
-                  className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all ${
+                  className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${
                     filter === cat ? "bg-slate-900 text-white" : "bg-white border border-slate-200 text-slate-400"
                   }`}
                 >
