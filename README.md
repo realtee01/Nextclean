@@ -44,3 +44,18 @@ src/
  ┗ App.jsx            # Main application logic & state management
 
 
+---
+
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 👷 Developed By
+
+**Tobiloba Akala** *Front-end Developer | React Specialist* [View LinkedIn](https://www.linkedin.com/in/your-profile-url) | [View Portfolio](https://yourportfolio.com)
+
+> "We clean, you live."
+
+
