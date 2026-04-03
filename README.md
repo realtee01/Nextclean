@@ -42,3 +42,9 @@ src/
  ┃ ┣ FAQ.jsx          # Interactive accordion for support
  ┃ ┗ ContactModal.jsx # Framer Motion powered pop-up
  ┗ App.jsx            # Main application logic & state management
+
+📝 License
+Distributed under the MIT License. See LICENSE for more information.
+👷 Developed By
+Tobiloba Akala Front-end Developer | React Specialist LinkedIn | Portfolio
+"We clean, you live."
