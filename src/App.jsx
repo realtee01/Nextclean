@@ -1,39 +1,51 @@
-import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import FilterBar from './components/FilterBar';
-import JobCard from './components/JobCard';
+import React, { useState } from 'react';
+// ... keep your other imports (Header, Hero, etc.)
 
-// Image Imports
-import cleaning5 from './assets/Cleaning-5.jpg';
-import cleaning4 from './assets/Cleaning-4.jpg';
-import cleaning6 from './assets/Cleaning-6.jpg';
+const allServicesData = [
+  { id: 1, category: "Deep Clean", title: "Deep Residential", image: cleaning5, desc: "Total home refresh." },
+  { id: 2, category: "Residential", title: "Standard Care", image: cleaning4, desc: "Weekly maintenance." },
+  { id: 3, category: "Commercial", title: "Office Sparkle", image: cleaning6, desc: "Professional workspace care." },
+  // Add more items here to make it "plenty"!
+];
 
-function App() {
+const App = () => {
+  const [filter, setFilter] = useState("All Services");
+
+  const filteredData = filter === "All Services" 
+    ? allServicesData 
+    : allServicesData.filter(item => item.category === filter);
+
   return (
-    <div className="min-h-screen bg-white">
+    <div>
       <Header />
       <Hero />
-      <FilterBar />
-      <section className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
-        <JobCard 
-          image={cleaning5} 
-          title="Deep Cleaning" 
-          desc="Complete top-to-bottom scrub."
-        />
-        <JobCard 
-          image={cleaning4} 
-          title="Standard Care" 
-          desc="Perfect for weekly maintenance."
-        />
-        <JobCard 
-          image={cleaning6} 
-          title="Post-Construction" 
-          desc="We handle the heavy lifting."
-        />
+      
+      {/* Filtering Buttons */}
+      <div className="max-w-7xl mx-auto px-10 py-10 overflow-x-auto flex gap-4">
+        {["All Services", "Residential", "Commercial", "Deep Clean"].map((cat) => (
+          <button 
+            key={cat}
+            onClick={() => setFilter(cat)}
+            className={`px-8 py-3 rounded-full border transition-all font-semibold ${
+              filter === cat ? "bg-green-600 text-white border-green-600 shadow-lg" : "border-slate-200 text-slate-600 hover:bg-slate-50"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Animated Grid */}
+      <section className="max-w-7xl mx-auto px-10 pb-20 grid md:grid-cols-3 gap-8">
+        {filteredData.map((service) => (
+          <JobCard 
+            key={service.id}
+            image={service.image}
+            title={service.title}
+            desc={service.desc}
+          />
+        ))}
       </section>
     </div>
   );
-}
-
-export default App;
+};
