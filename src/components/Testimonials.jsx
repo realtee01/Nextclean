@@ -5,10 +5,10 @@ const Testimonials = () => {
   const reviews = [
     { name: "Ayo Bankole", role: "Homeowner, Ikoyi", text: "Nextclean is the only service I trust in Lagos. Their attention to detail is actually insane. My house sparkles every time.", img: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=100&h=100&fit=crop" },
     { name: "Sarah J.", role: "Tech Lead, Yaba", text: "The standard clean was perfect for my busy schedule. Reliable staff and seamless booking. Highly recommended!", img: "https://images.unsplash.com/photo-1523824921871-d6f1a15151f1?w=100&h=100&fit=crop" },
-    { name: "bayo oladele", role: "Business Owner", text: "Professionalism at its peak. They handled my office sanitization with zero disruption to our workflow.", img: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop" },
+    { name: "Bayo oladele", role: "Business Owner", text: "Professionalism at its peak. They handled my office sanitization with zero disruption to our workflow.", img: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop" },
     { name: "Rebecca johnson", role: "It Consultant, London", text: "Managing properties in Lagos from the UK used to be a headache. Nextclean provides consistent quality and great support. They are the only team I trust to maintain my home while I'm away.",
 img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" },
-    { name: "A joyce", role: "Nurse, Houston", text: "I booked a post-construction clean for my parents' new house from all the way in Texas. The process was stress-free and the results were amazing. Nextclean is a lifesaver for those of us abroad."
+    { name: "Alice joyce", role: "Nurse, Houston", text: "I booked a post-construction clean for my nigerian parents' new house from all the way in Texas. The process was stress-free and the results were amazing. Nextclean is a lifesaver for those of us abroad."
 , img: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=100&h=100&fit=crop" }
   ];
 
