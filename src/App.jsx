@@ -8,8 +8,8 @@ import ContactModal from './components/ContactModal';
 import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Testimonials from './components/Testimonials';
-import CustomCursor from './components/CustomCursor';
 
+// Image Imports - Ensure these match your assets folder casing exactly
 import cleaning5 from './assets/Cleaning-5.jpg';
 import cleaning4 from './assets/Cleaning-4.jpg';
 import cleaning6 from './assets/Cleaning-6.jpg';
@@ -37,11 +37,11 @@ const App = () => {
 
   return (
     <div className="bg-white min-h-screen selection:bg-green-100 overflow-x-hidden">
-      <CustomCursor />
+      {/* Header & Hero */}
       <Header onContactClick={openBooking} />
-      
       <Hero onBookClick={openBooking} />
 
+      {/* Trust Bar */}
       <div className="bg-slate-50 py-12 md:py-16 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
@@ -58,6 +58,7 @@ const App = () => {
         </div>
       </div>
 
+      {/* Value Proposition */}
       <section className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24 grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
         <div>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 text-slate-900 leading-tight">
@@ -83,12 +84,12 @@ const App = () => {
         </motion.div>
       </section>
 
+      {/* Booking, Testimonials & Pricing */}
       <BookingProcess />
-      
       <Testimonials />
-
       <Pricing onBookClick={openBooking} />
 
+      {/* Services Grid */}
       <section id="services" className="bg-slate-50 py-16 md:py-24 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
@@ -124,6 +125,7 @@ const App = () => {
         </div>
       </section>
 
+      {/* FAQ & Footer */}
       <FAQ />
 
       <footer className="py-12 text-center bg-white border-t border-slate-100">
@@ -131,6 +133,7 @@ const App = () => {
         <p className="text-slate-400 font-medium text-xs">Redefining Domestic Excellence. Lagos, Nigeria.</p>
       </footer>
 
+      {/* Pop-up Modals */}
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
