@@ -5,6 +5,8 @@ import Hero from './components/Hero';
 import JobCard from './components/JobCard';
 import BookingProcess from './components/BookingProcess';
 import ContactModal from './components/ContactModal';
+import Pricing from './components/Pricing';
+import FAQ from './components/FAQ';
 
 import cleaning5 from './assets/Cleaning-5.jpg';
 import cleaning4 from './assets/Cleaning-4.jpg';
@@ -29,10 +31,13 @@ const App = () => {
   const categories = ["All Services", "Residential", "Deep Clean", "Commercial", "Gardening", "Moving"];
   const filteredData = filter === "All Services" ? services : services.filter(s => s.category === filter);
 
+  const openBooking = () => setIsModalOpen(true);
+
   return (
     <div className="bg-white min-h-screen selection:bg-green-100 overflow-x-hidden">
-      <Header onContactClick={() => setIsModalOpen(true)} />
-      <Hero onBookClick={() => setIsModalOpen(true)} />
+      <Header onContactClick={openBooking} />
+      
+      <Hero onBookClick={openBooking} />
 
       <div className="bg-slate-50 py-12 md:py-16 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -54,10 +59,10 @@ const App = () => {
         <div>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 text-slate-900 leading-tight">
             More than just a <br/>
-            <span className="text-green-600 italic">mop and bucket.</span>
+            <span className="text-green-600 italic underline decoration-green-100">mop and bucket.</span>
           </h2>
           <p className="text-slate-500 text-base md:text-lg mb-8 leading-relaxed">
-            Nextclean handles the logistics of a clean lifestyle.
+            Nextclean handles the logistics of a clean lifestyle so you don't have to.
           </p>
           <div className="grid grid-cols-2 gap-4">
             {['Vetted Staff', 'Hospital Grade', 'Custom Checklists', 'Insured'].map((item) => (
@@ -71,11 +76,13 @@ const App = () => {
         <motion.div whileHover={{ rotate: -1 }} className="bg-green-600 rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
           <h3 className="text-2xl font-bold mb-4">The Nextclean Guarantee</h3>
           <p className="opacity-90 text-sm md:text-base mb-8">100% satisfied or we re-clean for free within 24 hours.</p>
-          <button onClick={() => setIsModalOpen(true)} className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-lg">Start Now</button>
+          <button onClick={openBooking} className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-lg">Start Now</button>
         </motion.div>
       </section>
 
       <BookingProcess />
+
+      <Pricing onBookClick={openBooking} />
 
       <section id="services" className="bg-slate-50 py-16 md:py-24 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
@@ -104,7 +111,7 @@ const App = () => {
                   title={service.title}
                   desc={service.desc}
                   category={service.category}
-                  onCardClick={() => setIsModalOpen(true)} 
+                  onCardClick={openBooking} 
                 />
               ))}
             </AnimatePresence>
@@ -112,11 +119,13 @@ const App = () => {
         </div>
       </section>
 
+      <FAQ />
+
       <footer className="py-12 text-center bg-white border-t border-slate-100">
-        <div className="text-xl font-black text-green-600 mb-2">Nextclean.</div>
-        <p className="text-slate-400 font-medium text-xs">Lagos, Nigeria.</p>
-        <p className="text-slate-400 font-medium text-xs">(c) 2026 Nextclean </p>
-      </footer>
+          <div className="text-xl font-black text-green-600 mb-2">Nextclean.</div>
+        <p className="text-slate-400 font-medium text-xs">Redefining Domestic Excellence. Lagos, Nigeria.</p>
+            <p className="text-slate-400 font-medium text-xs">(c) 2026 Nextclean </p>
+        </footer>
 
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
