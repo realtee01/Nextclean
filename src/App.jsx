@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import JobCard from './components/JobCard';
@@ -9,7 +9,7 @@ import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Testimonials from './components/Testimonials';
 
-// Image Imports - Ensure these match your assets folder casing exactly
+// Image Imports
 import cleaning5 from './assets/Cleaning-5.jpg';
 import cleaning4 from './assets/Cleaning-4.jpg';
 import cleaning6 from './assets/Cleaning-6.jpg';
@@ -20,6 +20,9 @@ import moving1 from './assets/Moving-1.jpg';
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filter, setFilter] = useState("All Services");
+  
+  // 1. Scroll Progress Logic
+  const { scrollYProgress } = useScroll();
 
   const services = [
     { id: 1, category: "Deep Clean", title: "Deep Residential", image: cleaning5, desc: "A 50-point checklist covering baseboards, vents, and behind appliances." },
@@ -37,11 +40,16 @@ const App = () => {
 
   return (
     <div className="bg-white min-h-screen selection:bg-green-100 overflow-x-hidden">
-      {/* Header & Hero */}
+      {/* 2. Scroll Progress Indicator */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1.5 bg-green-600 origin-left z-[110]"
+        style={{ scaleX: scrollYProgress }}
+      />
+
       <Header onContactClick={openBooking} />
       <Hero onBookClick={openBooking} />
 
-      {/* Trust Bar */}
+      {/* 3. Trust Bar with Animated Stats */}
       <div className="bg-slate-50 py-12 md:py-16 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
@@ -50,10 +58,24 @@ const App = () => {
             { label: "Satisfaction", val: "100%" },
             { label: "Lagos Locations", val: "12+" }
           ].map((stat, i) => (
-            <div key={i}>
-              <h4 className="text-2xl md:text-4xl font-black text-slate-900">{stat.val}</h4>
-              <p className="text-slate-400 text-[8px] md:text-[10px] font-bold uppercase tracking-widest">{stat.label}</p>
-            </div>
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <motion.h4 
+                initial={{ scale: 0.5 }}
+                whileInView={{ scale: 1 }}
+                className="text-2xl md:text-4xl font-black text-slate-900"
+              >
+                {stat.val}
+              </motion.h4>
+              <p className="text-slate-400 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mt-1">
+                {stat.label}
+              </p>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -77,16 +99,33 @@ const App = () => {
             ))}
           </div>
         </div>
-        <motion.div whileHover={{ rotate: -1 }} className="bg-green-600 rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+
+        {/* 4. Magnetic & Glow Button on Guarantee Card */}
+        <motion.div 
+          whileHover={{ rotate: -1 }} 
+          className="bg-green-600 rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden"
+        >
           <h3 className="text-2xl font-bold mb-4">The Nextclean Guarantee</h3>
           <p className="opacity-90 text-sm md:text-base mb-8">100% satisfied or we re-clean for free within 24 hours.</p>
-          <button onClick={openBooking} className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-lg">Start Now</button>
+          <motion.button 
+            onClick={openBooking} 
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: "0 20px 25px -5px rgb(22 163 74 / 0.4)",
+              y: -2 
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-white text-green-600 px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-lg transition-shadow"
+          >
+            Start Now
+          </motion.button>
         </motion.div>
       </section>
 
-      {/* Booking, Testimonials & Pricing */}
       <BookingProcess />
       <Testimonials />
+      
+      {/* 5. Pricing with New Hover Physics is handled inside its own component */}
       <Pricing onBookClick={openBooking} />
 
       {/* Services Grid */}
@@ -125,16 +164,16 @@ const App = () => {
         </div>
       </section>
 
-      {/* FAQ & Footer */}
       <FAQ />
 
       <footer className="py-12 text-center bg-white border-t border-slate-100">
         <div className="text-xl font-black text-green-600 mb-2">Nextclean.</div>
-        <p className="text-slate-400 font-medium text-xs">Redefining Domestic Excellence. Lagos, Nigeria.</p>
-         <p className="text-slate-400 font-medium text-xs">(©) 2026 Nextclean</p>
+        <div className="flex flex-col gap-1">
+          <p className="text-slate-400 font-medium text-xs">Redefining Domestic Excellence. Lagos, Nigeria.</p>
+          <p className="text-slate-300 font-bold text-[10px] tracking-widest uppercase mt-2">© 2026 Nextclean</p>
+        </div>
       </footer>
 
-      {/* Pop-up Modals */}
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
